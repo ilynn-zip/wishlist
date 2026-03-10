@@ -286,13 +286,15 @@ pdfBtn.addEventListener('click', () => {
     }
 
     try {
+        // Определяем акцентный цвет в зависимости от темы
         const isDark = document.body.classList.contains('dark-theme');
-        const accentColor = isDark ? '#B8A2D4' : '#B48EAD';
-        const textColor = isDark ? '#E5E9F0' : '#2D2A3A';
-        const borderColor = isDark ? '#374151' : '#E8D9E4';
-        const evenRowColor = isDark ? '#1F2937' : '#F9F4F0';
+        const accentColor = isDark ? '#B8A2D4' : '#B48EAD'; // лиловый из темы
 
-        // Формируем таблицу: первая колонка автоматической ширины, вторая занимает остаток
+        // Фиксированные цвета светлой темы (фон и текст)
+        const textColor = '#2D2A3A';          // тёмно-серый текст
+        const borderColor = '#E8D9E4';        // светлая граница
+        const evenRowColor = '#F9F4F0';        // фон чётных строк
+
         const tableBody = [
             ['Title', 'Link']
         ];
@@ -304,7 +306,6 @@ pdfBtn.addEventListener('click', () => {
                 if (!url.match(/^https?:\/\//i)) {
                     url = 'https://' + url;
                 }
-                // Для длинных ссылок включён перенос
                 linkCell = {
                     text: url,
                     link: url,
@@ -325,19 +326,18 @@ pdfBtn.addEventListener('click', () => {
         const docDefinition = {
             pageMargins: [40, 50, 40, 60],
             content: [
-                // Заголовок без эмодзи, только текст
                 { text: 'My Wishlist', style: 'header', margin: [0, 0, 0, 10] },
                 { text: `Generated: ${new Date().toLocaleDateString()}`, style: 'subheader', margin: [0, 0, 0, 20] },
                 {
                     table: {
                         headerRows: 1,
-                        widths: ['auto', '*'], // первая по ширине содержимого, вторая занимает остаток
+                        widths: ['auto', '*'],
                         body: tableBody,
                     },
                     layout: {
                         fillColor: function(rowIndex) {
-                            if (rowIndex === 0) return accentColor;
-                            return (rowIndex % 2 === 0) ? evenRowColor : null;
+                            if (rowIndex === 0) return accentColor; // шапка цветом акцента
+                            return (rowIndex % 2 === 0) ? evenRowColor : null; // чередование
                         },
                         hLineColor: function() { return borderColor; },
                         vLineColor: function() { return borderColor; },
