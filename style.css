@@ -1,35 +1,39 @@
 /* ===== Базовые переменные (светлая тема) ===== */
 :root {
-    --bg: #F9F4F0;
-    --surface: #FFFFFF;
-    --accent: #B48EAD;
+    --bg: #F9F4F0;              /* Тёплый светлый фон */
+    --surface: #FFFFFF;          /* Поверхности (карточки, форма) */
+    --accent: #B48EAD;           /* Мягкий лиловый */
     --accent-light: #D7B9D0;
     --accent-dark: #8F6B87;
     --text: #2D2A3A;
     --text-muted: #6B6578;
     --border: #E8D9E4;
     --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    --shadow-hover: 0 12px 25px rgba(180, 142, 173, 0.3); 
-    --radius: 30px;
-    --radius-item: 20px;
-    --gradient: linear-gradient(135deg, #B48EAD, #D7B9D0);
+    --shadow-hover: 0 15px 30px rgba(180, 142, 173, 0.3);
+    --radius: 30px;                       /* Равномерное скругление контейнера */
+    --radius-item: 20px 5px 20px 5px;         /* Скругление для карточек */
+    --gradient: linear-gradient(145deg, #B48EAD, #D7B9D0);
     --font-display: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.8);
 }
 
 /* ===== Тёмная тема (холодный графит + лавандовый) ===== */
 body.dark-theme {
-    --bg: #15181F;
+    --bg: #15181F;              /* Глубокий тёмно-серый */
     --surface: #222731;
-    --accent: #B8A2D4;
+    --accent: #B8A2D4;           /* Лавандовый акцент */
     --accent-light: #D2C0E6;
     --accent-dark: #927DB0;
     --text: #E5E9F0;
     --text-muted: #9CA3AF;
     --border: #374151;
     --shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    --shadow-hover: 0 12px 25px rgba(184, 162, 212, 0.3);
-    --gradient: linear-gradient(135deg, #B8A2D4, #D2C0E6);
+    --shadow-hover: 0 15px 30px rgba(184, 162, 212, 0.4);
+    --gradient: linear-gradient(145deg, #B8A2D4, #D2C0E6);
+    --glass-bg: rgba(34, 39, 49, 0.7);
+    --glass-border: rgba(55, 65, 81, 0.8);
 }
 
 * {
@@ -40,6 +44,9 @@ body.dark-theme {
 
 body {
     background-color: var(--bg);
+    background-image: 
+        radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--accent-light) 5%, transparent) 0%, transparent 40%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -54,12 +61,14 @@ body {
 .container {
     max-width: 800px;
     width: 100%;
-    background: var(--surface);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow), 0 0 0 1px var(--glass-border);
     padding: 40px;
     transition: background 0.3s, box-shadow 0.3s;
-    border: 1px solid var(--border);
+    border: 1px solid var(--glass-border);
 }
 
 /* Шапка */
@@ -79,10 +88,12 @@ h1 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.02em;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
 }
 
 .theme-btn {
-    background: var(--surface);
+    background: var(--glass-bg);
+    backdrop-filter: blur(4px);
     border: 2px solid var(--accent);
     color: var(--accent);
     width: 48px;
@@ -93,18 +104,17 @@ h1 {
     justify-content: center;
     cursor: pointer;
     font-size: 1.4rem;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     box-shadow: var(--shadow);
 }
 
 .theme-btn:hover {
     background: var(--accent);
     color: var(--surface);
-    transform: rotate(15deg) scale(1.1);
-    border-color: var(--accent-light);
+    transform: rotate(10deg) scale(1.1);
 }
 
-/* Заголовки секций с кнопкой сворачивания */
+/* Заголовки секций */
 .section-header {
     display: flex;
     align-items: center;
@@ -116,8 +126,14 @@ h1 {
     margin-bottom: 0;
 }
 
-.collapse-btn {
-    background: transparent;
+.header-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.collapse-btn, .close-btn {
+    background: var(--glass-bg);
+    backdrop-filter: blur(4px);
     border: 1px solid var(--border);
     color: var(--text-muted);
     width: 36px;
@@ -127,15 +143,16 @@ h1 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1rem;
     transition: all 0.3s;
+    font-size: 1rem;
     box-shadow: var(--shadow);
 }
 
-.collapse-btn:hover {
+.collapse-btn:hover, .close-btn:hover {
     background: var(--accent);
     color: var(--surface);
     border-color: var(--accent);
+    transform: rotate(5deg) scale(1.1);
 }
 
 .collapse-btn i {
@@ -158,10 +175,11 @@ h2 {
 
 h2 i {
     color: var(--accent);
-    background: var(--surface);
+    background: var(--glass-bg);
     padding: 8px;
     border-radius: 50%;
     box-shadow: var(--shadow);
+    backdrop-filter: blur(4px);
 }
 
 /* Форма */
@@ -172,8 +190,14 @@ h2 i {
     margin-bottom: 25px;
     background: var(--bg);
     padding: 20px;
-    border-radius: var(--radius-item);
+    border-radius: 20px;
     border: 1px solid var(--border);
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+#wish-form:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
 #wish-form input {
@@ -191,6 +215,7 @@ h2 i {
 #wish-form input:focus {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+    transform: scale(1.02);
 }
 
 #wish-form input::placeholder {
@@ -214,7 +239,7 @@ h2 i {
 }
 
 #wish-form button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
     box-shadow: var(--shadow-hover);
 }
 
@@ -227,7 +252,8 @@ h2 i {
 }
 
 .my-tools button.secondary {
-    background: transparent;
+    background: var(--glass-bg);
+    backdrop-filter: blur(4px);
     border: 1px solid var(--border);
     color: var(--text);
     padding: 12px 22px;
@@ -239,15 +265,14 @@ h2 i {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    backdrop-filter: blur(2px);
+    box-shadow: var(--shadow);
 }
 
 .my-tools button.secondary:hover {
     background: var(--accent);
     color: var(--surface);
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    transform: translateY(-2px) scale(1.02);
 }
 
 /* Списки */
@@ -257,18 +282,20 @@ h2 i {
     flex-direction: column;
     gap: 15px;
     max-height: 1000px;
-    overflow: hidden;
+    overflow: visible;
     transition: max-height 0.5s ease-in-out, opacity 0.3s;
     opacity: 1;
-    padding: 2px; /* чтобы тени не обрезались */
+    padding: 2px;
 }
 
 .wish-list.collapsed {
     max-height: 0;
     opacity: 0;
     margin: 0;
+    overflow: hidden;
 }
 
+/* Карточки с двумя уголками */
 .wish-item {
     background: var(--bg);
     border-radius: var(--radius-item);
@@ -277,20 +304,57 @@ h2 i {
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     transition: all 0.3s;
     box-shadow: var(--shadow);
     animation: item-appear 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Правый верхний уголок */
+.wish-item::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 45px;
+    height: 45px;
+    background: var(--accent);
+    opacity: 0.1;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+/* Левый нижний уголок */
+.wish-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background: var(--accent);
+    opacity: 0.1;
+    clip-path: polygon(0 100%, 0 0, 100% 100%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.wish-item:hover::after,
+.wish-item:hover::before {
+    opacity: 0.3;
 }
 
 @keyframes item-appear {
     0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(10px) scale(0.95);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -311,14 +375,15 @@ h2 i {
 }
 
 .wish-item:hover {
+    transform: translateY(-3px);
     border-color: var(--accent);
     box-shadow: var(--shadow-hover);
-    transform: none;
 }
 
 .wish-info {
     flex: 1;
     min-width: 0;
+    z-index: 2;
 }
 
 .wish-title {
@@ -343,7 +408,14 @@ h2 i {
     text-decoration: underline;
 }
 
-.delete-btn, .add-btn {
+/* Кнопки действий на карточках */
+.item-buttons {
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.edit-btn, .delete-btn, .add-btn {
     background: var(--surface);
     border: 1px solid var(--border);
     width: 42px;
@@ -353,28 +425,35 @@ h2 i {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     font-size: 1.2rem;
     color: var(--text-muted);
     box-shadow: var(--shadow);
+    z-index: 2;
+}
+
+.edit-btn:hover {
+    background: var(--accent);
+    color: var(--surface);
+    border-color: var(--accent);
+    transform: scale(1.15) rotate(5deg);
 }
 
 .delete-btn:hover {
     background: #E9967A;
     color: white;
     border-color: #E9967A;
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.15) rotate(5deg);
 }
 
 .add-btn:hover {
     background: var(--accent);
     color: var(--surface);
     border-color: var(--accent);
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 /* Просмотр чужого списка */
-/* ===== Просмотр чужого списка ===== */
 .shared-view {
     margin-top: 40px;
     padding-top: 25px;
@@ -385,47 +464,6 @@ h2 i {
     margin-bottom: 20px;
 }
 
-.header-buttons {
-    display: flex;
-    gap: 8px;
-}
-
-.close-btn {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 1rem;
-    box-shadow: var(--shadow);
-}
-
-.close-btn:hover {
-    background: var(--accent);
-    color: var(--surface);
-    border-color: var(--accent);
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* Общая подсказка для основного списка */
-.note {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: 20px;
-    padding: 10px;
-    background: var(--bg);
-    border-radius: 40px;
-    border: 1px dashed var(--border);
-}
-
-/* Подсказка для чужого списка (была .shared-note, оставляем как есть) */
 .shared-note {
     text-align: center;
     color: var(--text-muted);
@@ -433,17 +471,7 @@ h2 i {
     margin-top: 20px;
     padding: 10px;
     background: var(--bg);
-    border-radius: 40px;
-    border: 1px dashed var(--border);
-}
-
-.shared-note {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: 20px;
-    padding: 10px;
-    background: var(--bg);
+    backdrop-filter: blur(4px);
     border-radius: 40px;
     border: 1px dashed var(--border);
 }
@@ -454,23 +482,36 @@ h2 i {
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--surface);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
     color: var(--text);
     padding: 14px 25px;
-    border-radius: 50px;
+    border-radius: 60px;
     font-size: 1rem;
     font-weight: 500;
-    border: 1px solid var(--border);
+    border: 1px solid var(--glass-border);
     box-shadow: var(--shadow);
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
     z-index: 1000;
-    backdrop-filter: blur(8px);
 }
 
 .notification.show {
     opacity: 1;
+}
+
+/* Подсказка основного списка */
+.note {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 20px;
+    padding: 10px;
+    background: var(--bg);
+    backdrop-filter: blur(4px);
+    border-radius: 40px;
+    border: 1px dashed var(--border);
 }
 
 /* Адаптивность */
@@ -503,7 +544,7 @@ h2 i {
         justify-content: center;
     }
 
-    .close-btn {
-        top: 15px;
+    .item-buttons {
+        gap: 5px;
     }
 }
