@@ -561,42 +561,97 @@ h2 i {
 /* Адаптивность */
 @media (max-width: 600px) {
     .container {
-        padding: 25px 15px;
+        padding: 20px 12px;
     }
 
     h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
 
     .theme-btn {
-        width: 42px;
-        height: 42px;
-        font-size: 1.2rem;
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
     }
 
-    #wish-form {
-        flex-direction: column;
+    .section-header h2 {
+        font-size: 1.4rem;
     }
 
-    #wish-form button {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .my-tools button {
-        flex: 1 1 auto;
-        justify-content: center;
-    }
-
-    .item-buttons {
+    .header-actions {
         gap: 5px;
     }
 
-    .header-actions .secondary .btn-text {
-        display: none;
+    .header-actions .secondary {
+        padding: 6px 10px;
+        font-size: 0.85rem;
     }
 
-    .header-actions .secondary {
+    .header-actions .secondary .btn-text {
+        display: none; /* скрываем текст, оставляем иконки */
+    }
+
+    .collapse-btn, .close-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    #wish-form {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    #wish-form input {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border-radius: 30px;
+    }
+
+    #wish-form button {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+
+    .my-tools {
+        margin: 0 0 15px 0;
+    }
+
+    .my-tools button.secondary {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    .wish-item {
+        padding: 14px 18px;
+    }
+
+    .wish-title {
+        font-size: 1.1rem;
+    }
+
+    .wish-link {
+        font-size: 0.85rem;
+    }
+
+    .delete-btn, .add-btn, .edit-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .note, .shared-note {
+        font-size: 0.8rem;
         padding: 8px;
+    }
+
+    .shared-view {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+
+    .close-btn {
+        width: 32px;
+        height: 32px;
     }
 }
