@@ -1,8 +1,11 @@
 /* ===== Базовые переменные (светлая тема) ===== */
 :root {
-    --bg: #F9F4F0;              /* Тёплый светлый фон */
-    --surface: #FFFFFF;          /* Поверхности (карточки, форма) */
-    --accent: #B48EAD;           /* Мягкий лиловый */
+    --bg: #F9F4F0;
+    /* Тёплый светлый фон */
+    --surface: #FFFFFF;
+    /* Поверхности (карточки, форма) */
+    --accent: #B48EAD;
+    /* Мягкий лиловый */
     --accent-light: #D7B9D0;
     --accent-dark: #8F6B87;
     --text: #2D2A3A;
@@ -10,8 +13,10 @@
     --border: #E8D9E4;
     --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     --shadow-hover: 0 15px 30px rgba(180, 142, 173, 0.3);
-    --radius: 30px;                       /* Равномерное скругление контейнера */
-    --radius-item: 20px 5px 20px 5px;         /* Скругление для карточек */
+    --radius: 30px;
+    /* Равномерное скругление контейнера */
+    --radius-item: 20px 5px 20px 5px;
+    /* Скругление для карточек */
     --gradient: linear-gradient(145deg, #B48EAD, #D7B9D0);
     --font-display: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -21,9 +26,11 @@
 
 /* ===== Тёмная тема (холодный графит + лавандовый) ===== */
 body.dark-theme {
-    --bg: #15181F;              /* Глубокий тёмно-серый */
+    --bg: #15181F;
+    /* Глубокий тёмно-серый */
     --surface: #222731;
-    --accent: #B8A2D4;           /* Лавандовый акцент */
+    --accent: #B8A2D4;
+    /* Лавандовый акцент */
     --accent-light: #D2C0E6;
     --accent-dark: #927DB0;
     --text: #E5E9F0;
@@ -44,7 +51,7 @@ body.dark-theme {
 
 body {
     background-color: var(--bg);
-    background-image: 
+    background-image:
         radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 30%),
         radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--accent-light) 5%, transparent) 0%, transparent 40%);
     min-height: 100vh;
@@ -79,6 +86,37 @@ body {
     margin-bottom: 30px;
 }
 
+.header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Стили для вторичных кнопок внутри заголовка (Share, PDF) */
+.header-actions .secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: var(--shadow);
+}
+
+.header-actions .secondary:hover {
+    background: var(--accent);
+    color: var(--surface);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+
 h1 {
     font-family: var(--font-display);
     font-size: 2.8rem;
@@ -88,7 +126,7 @@ h1 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.02em;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .theme-btn {
@@ -131,7 +169,8 @@ h1 {
     gap: 8px;
 }
 
-.collapse-btn, .close-btn {
+.collapse-btn,
+.close-btn {
     background: var(--glass-bg);
     backdrop-filter: blur(4px);
     border: 1px solid var(--border);
@@ -148,7 +187,8 @@ h1 {
     box-shadow: var(--shadow);
 }
 
-.collapse-btn:hover, .close-btn:hover {
+.collapse-btn:hover,
+.close-btn:hover {
     background: var(--accent);
     color: var(--surface);
     border-color: var(--accent);
@@ -352,6 +392,7 @@ h2 i {
         opacity: 0;
         transform: translateY(10px) scale(0.95);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -368,6 +409,7 @@ h2 i {
         opacity: 1;
         transform: scale(1);
     }
+
     100% {
         opacity: 0;
         transform: scale(0.8);
@@ -415,7 +457,9 @@ h2 i {
     z-index: 2;
 }
 
-.edit-btn, .delete-btn, .add-btn {
+.edit-btn,
+.delete-btn,
+.add-btn {
     background: var(--surface);
     border: 1px solid var(--border);
     width: 42px;
@@ -546,5 +590,13 @@ h2 i {
 
     .item-buttons {
         gap: 5px;
+    }
+
+    .header-actions .secondary .btn-text {
+        display: none;
+    }
+
+    .header-actions .secondary {
+        padding: 8px;
     }
 }

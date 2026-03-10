@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist • share & save</title>
-    <meta name="description" content="Create your personal wishlist, share it with friends, and export as PDF. Your data stays in your browser.">
+    <meta name="description"
+        content="Create your personal wishlist, share it with friends, and export as PDF. Your data stays in your browser.">
     <meta name="keywords" content="wishlist, gift list, share, PDF, localStorage">
     <meta name="author" content="YourName">
     <!-- Favicon (SVG emoji) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- PDFmake -->
@@ -21,6 +26,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -34,20 +40,21 @@
         <section class="my-wishlist">
             <div class="section-header">
                 <h2><i class="fas fa-list"></i> My Wishlist</h2>
-                <button class="collapse-btn" data-target="my-list">
-                    <i class="fas fa-chevron-up"></i>
-                </button>
+                <div class="header-actions">
+                    <button id="share-btn" class="secondary" title="Share"><i class="fas fa-share-alt"></i><span
+                            class="btn-text"> Share</span></button>
+                    <button id="pdf-btn" class="secondary" title="PDF"><i class="fas fa-file-pdf"></i><span
+                            class="btn-text"> PDF</span></button>
+                    <button class="collapse-btn" data-target="my-list">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
             </div>
             <form id="wish-form">
                 <input type="text" id="wish-title" placeholder="What do you want?" required>
                 <input type="url" id="wish-url" placeholder="Link (optional)">
                 <button type="submit"><i class="fas fa-plus"></i> Add</button>
             </form>
-
-            <div class="my-tools">
-                <button id="share-btn" class="secondary"><i class="fas fa-share-alt"></i> Share</button>
-                <button id="pdf-btn" class="secondary"><i class="fas fa-file-pdf"></i> PDF</button>
-            </div>
 
             <ul id="wish-list" class="wish-list"></ul>
 
@@ -75,4 +82,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
